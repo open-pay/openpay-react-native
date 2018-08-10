@@ -120,7 +120,7 @@ export default class OpenpayScreen extends Component {
 }
 ```
 
-## Future Improvement
+## Future Improvements
 * Customize credit card image
 * Customize button style
 * Add unit tests
