@@ -38,8 +38,7 @@ export default class Openpay extends Component {
         this.createDeviceSessionId();        
     }
 
-    componentWillReceiveProps(nextProps) {
-        console.log('componentWillReceiveProps', nextProps.loading);
+    componentWillReceiveProps(nextProps) {        
         this.setState(() => ({loading: nextProps.loading}));
     }
 
@@ -123,17 +122,16 @@ export default class Openpay extends Component {
 
 
     identifierForVendor = () => {
-        let deviceSerial = 0;
+        let deviceSerial = '';
         try {
             if (Expo.Constants.appOwnership === 'expo') {
                 console.log('Running in expo');                                
-                deviceSerial = Expo.Constants.installationId;
+                deviceSerial = typeof Expo.Constants.installationId !== 'undefined' ? Expo.Constants.installationId : Expo.Constants.deviceId;
             } else {                
                 deviceSerial = DeviceInfo.getUniqueID();
             }            
         } catch (e) {
-            console.log('error reading device ID', e);
-            deviceSerial = 1;            
+            console.log('error reading device ID', e);            
         }
 
         return deviceSerial;
