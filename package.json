@@ -1,6 +1,6 @@
 {
   "name": "openpay-react-native",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Generates the device_session_id and tokenize the credit cards with Openpay.",
   "main": "index.js",
   "scripts": {
@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fedebalderas/openpay-react-native.git"
+    "url": "git+https://github.com/open-pay/openpay-react-native.git"
   },
   "bugs": {
-    "url": "https://github.com/fedebalderas/openpay-react-native/issues"
+    "url": "https://github.com/open-pay/openpay-react-native/issues"
   },
   "homepage": "http://openpay.mx/",
   "keywords": [
