@@ -8,12 +8,16 @@ openpay-react-native Generates the device_session_id and tokenize the credit car
 * Generates the device_session_id (https://openpay.mx/docs/fraud-tool.html)
 * Tokenize the credit cards (https://openpay.mx/docs/openpayjs.html)
 
-## Installation
-
-### Requirements
+## Requirements
 * npm >= 6
 
+## Installation
+
+### Via npm
 `$ npm install openpay-react-native --save`
+
+### Via yarn
+`$ yarn add openpay-react-native`
 
 ## Usage
 
