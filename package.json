@@ -32,6 +32,7 @@
     "react-native-credit-card-input-fullpage": "^0.2.0",
     "react-native-device-info": "^0.22.2",
     "react-native-elements": "^0.19.1",
+    "react-native-webview": "^11.4.2",
     "sprintf-js": "^1.1.1",
     "user": "0.0.0",
     "uuid": "^3.3.2"
