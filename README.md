@@ -16,7 +16,7 @@ npm install openpay-react-native
 You can use our default form or you can use a custom form
 
 ```js
-import OpenpayReactNative from "openpay-react-native";
+import Openpay from 'openpay-react-native';
 
 // ...
 
@@ -27,7 +27,6 @@ import OpenpayReactNative from "openpay-react-native";
   //address={address} //optional
   successToken={successToken}
   failToken={failToken}
-  loading={loading}
   deviceSession={deviceSession}
   buttonText="Pagar"
   custom={false}
@@ -46,7 +45,6 @@ import OpenpayReactNative from "openpay-react-native";
                         //address={address} //optional
                         successToken={successToken}
                         failToken={failToken}
-                        loading={loading}
                         deviceSession={deviceSession}
                         buttonText="Pagar"
                         custom={false}
@@ -80,7 +78,7 @@ With the inicialization of the component you have to pass custom to true: custom
 session callback and let you tokenize the card manually with the exported function:
 
 ```ts
-import {Openpay,createTokenWithCard} from 'openpay-react-native';
+import Openpay, {createTokenWithCard} from 'openpay-react-native';
 ```
 
 ```ts

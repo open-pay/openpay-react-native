@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect} from 'react';
 import {Alert, SafeAreaView, ScrollView, StatusBar, StyleSheet, View,} from 'react-native';
-import Openpay from 'openpay-react-native';
+import Openpay, {createTokenWithCard} from 'openpay-react-native';
 
 export default function App() {
     const successToken = (response) => {
@@ -23,26 +23,22 @@ export default function App() {
         console.log(response);
     };
 
-    const loading = (loading) => {
-        console.log(loading);
-    };
-
     useEffect(() => {
         // Discomment to test tokenize with custom form
-        // createTokenWithCard(
-        //   {
-        //     holder_name: 'Nombre Prueba',
-        //     cvv2: '111',
-        //     expiration_month: '12',
-        //     card_number: '424242424242424242',
-        //     expiration_year: '25',
-        //     isProductionMode: false,
-        //     merchantId: 'm2tmftuv5jao96rrezj2',
-        //     publicKey: 'pk_d5e9bff37db4468da3f80148bb94f263',
-        //   }
-        // ).then((response) => {
-        //   console.log(response);
-        // });
+        createTokenWithCard(
+            {
+                holder_name: 'Nombre Prueba',
+                cvv2: '111',
+                expiration_month: '12',
+                card_number: '424242424242424242',
+                expiration_year: '25',
+                isProductionMode: false,
+                merchantId: 'm2tmftuv5jao96rrezj2',
+                publicKey: 'pk_d5e9bff37db4468da3f80148bb94f263',
+            }
+        ).then((response) => {
+            console.log(response);
+        });
     });
 
     const address = {
@@ -70,7 +66,6 @@ export default function App() {
                         //address={address} //optional
                         successToken={successToken}
                         failToken={failToken}
-                        loading={loading}
                         deviceSession={deviceSession}
                         buttonText="Pagar"
                         custom={false}
