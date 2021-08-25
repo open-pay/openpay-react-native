@@ -7,9 +7,11 @@ Openpay
 
 ## Installation
 
-```sh
-npm install openpay-react-native
-```
+### Via npm
+`$ npm install openpay-react-native --save`
+
+### Via yarn
+`$ yarn add openpay-react-native`
 
 ## Usage
 
