@@ -42,8 +42,8 @@ import Openpay from 'openpay-react-native';
 ```ts
 <Openpay
                         isProductionMode={false}
-                        merchantId="m2tmftuv5jao96rrezj2"
-                        publicKey="pk_d5e9bff37db4468da3f80148bb94f263"
+                        merchantId="merchantId"
+                        publicKey="publicKey"
                         //address={address} //optional
                         successToken={successToken}
                         failToken={failToken}
