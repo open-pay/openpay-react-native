@@ -48,7 +48,7 @@ const sendFunction = (method, resource, data) => {
         });
 };
 
-export default class Openpay extends Component {
+export class Openpay extends Component {
     creditCardRef;
 
     labels = {

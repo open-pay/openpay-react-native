@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect} from 'react';
 import {Alert, SafeAreaView, ScrollView, StatusBar, StyleSheet, View,} from 'react-native';
-import Openpay, {createTokenWithCard} from 'openpay-react-native';
+import {Openpay, createTokenWithCard} from 'openpay-react-native';
 
 export default function App() {
     const successToken = (response) => {
