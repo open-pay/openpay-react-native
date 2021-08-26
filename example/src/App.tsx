@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useEffect} from 'react';
-import {Alert, SafeAreaView, ScrollView, StatusBar, StyleSheet, View,} from 'react-native';
-import {Openpay, createTokenWithCard} from 'openpay-react-native';
+import {Alert, StyleSheet, Text, View,} from 'react-native';
+import {createTokenWithCard, Openpay} from 'openpay-react-native';
 
 export default function App() {
     const successToken = (response) => {
@@ -52,46 +52,41 @@ export default function App() {
     };
 
     return (
-        <SafeAreaView>
-            <StatusBar barStyle={'light-content'}/>
-            <ScrollView
-                style={styles.scrollView}
-                contentInsetAdjustmentBehavior="automatic"
-            >
-                <View style={styles.sectionContainer}>
-                    <Openpay
-                        isProductionMode={false}
-                        merchantId="m2tmftuv5jao96rrezj2"
-                        publicKey="pk_d5e9bff37db4468da3f80148bb94f263"
-                        //address={address} //optional
-                        successToken={successToken}
-                        failToken={failToken}
-                        deviceSession={deviceSession}
-                        buttonText="Pagar"
-                        custom={false}
-                        labels={
-                            {
-                                holder: 'Nombre completo',
-                                expiration: 'FECHA'
-                            }
-                        }
-                        placeholders={{
-                            holder: "Nombre Apellidos",
-                            number: 'xxxx xxxx **** ****',
-                            expiration: 'MM/YY',
-                            cvv: 'CVV',
-                        }}
-                    />
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+        <View style={styles.sectionContainer}>
+            <Openpay
+                isProductionMode={false}
+                merchantId="m2tmftuv5jao96rrezj2"
+                publicKey="pk_d5e9bff37db4468da3f80148bb94f263"
+                //address={address} //optional
+                successToken={successToken}
+                failToken={failToken}
+                deviceSession={deviceSession}
+                buttonText="Pagar"
+                custom={false}
+                labels={
+                    {
+                        holder: 'Nombre completo',
+                        expiration: 'FECHA'
+                    }
+                }
+                placeholders={{
+                    holder: "Nombre Apellidos",
+                    number: 'xxxx xxxx **** ****',
+                    expiration: 'MM/YY',
+                    cvv: 'CVV',
+                }}
+            />
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     sectionContainer: {
-        marginTop: 32,
-        paddingHorizontal: 24,
+        paddingTop:60,
+        // flexDirection: 'column',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // backgroundColor: 'red',
     },
     scrollView: {
         // paddingBottom : 400

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import * as Expo from 'react-native';
-import {KeyboardAvoidingView, Platform, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import uuidv4 from 'uuid/v4';
 import DeviceInfo from 'react-native-device-info';
 import sprintfJs from 'sprintf-js';
@@ -246,10 +246,7 @@ export class Openpay extends Component {
         const CardWrapper = () => {
             if (!this.props.custom) {
                 return (
-                    <KeyboardAvoidingView
-                        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                        keyboardVerticalOffset={20}
-                    >
+                    <View style={styles.cardWrapper}>
                         <CreditCard
                             ref={this.creditCardRef}
                             labels={this.labels}
@@ -262,7 +259,7 @@ export class Openpay extends Component {
                             title={this.props.buttonText}
                             onPress={handleSubmit}
                         />
-                    </KeyboardAvoidingView>
+                    </View>
                 );
             } else {
                 return <View/>;
@@ -270,7 +267,7 @@ export class Openpay extends Component {
         };
 
         return (
-            <View style={styles.container}>
+            <View>
                 <CardWrapper/>
                 <WebView
                     source={{uri: uri}}
@@ -282,8 +279,12 @@ export class Openpay extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        paddingBottom: 400,
+    cardWrapper: {
+        height: 300,
+        // flexDirection: 'column',
+        // justifyContent: 'center',
+        alignItems: 'center',
+        // backgroundColor: 'yellow',
     },
     button: {
         height: 45,
@@ -295,7 +296,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 30,
         padding: 5,
-        width: '100%',
+        width: 340,
     },
 });
 
