@@ -1,6 +1,6 @@
 {
   "name": "openpay-react-native",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "Openpay library",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
