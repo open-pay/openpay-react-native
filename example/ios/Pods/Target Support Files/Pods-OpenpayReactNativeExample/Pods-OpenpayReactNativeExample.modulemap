@@ -1,0 +1,6 @@
+module Pods_OpenpayReactNativeExample {
+  umbrella header "Pods-OpenpayReactNativeExample-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,15 +1,9 @@
-# Openpay React Native ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
+# openpay-react-native
 
-openpay-react-native Generates the device_session_id and tokenize the credit cards with Openpay.
+Openpay
 
-![Openpay React Native](https://image.ibb.co/h6Ac89/screenshot.png)
 
-## Features
-* Generates the device_session_id (https://openpay.mx/docs/fraud-tool.html)
-* Tokenize the credit cards (https://openpay.mx/docs/openpayjs.html)
-
-## Requirements
-* npm >= 6
+![img.png](img.png)
 
 ## Installation
 
@@ -21,116 +15,163 @@ openpay-react-native Generates the device_session_id and tokenize the credit car
 
 ## Usage
 
-```js
-import Openpay, {createDeviceSessionId} from 'openpay-react-native';
+You can use our default form or you can use a custom form
 
-<Openpay 
-    isProductionMode={false} 
-    merchantId="YOUR_MERCHANT_ID" 
-    publicKey="YOUR_PUBLIC_KEY" 
-    address={address} 
-    successToken={this.successToken} 
-    failToken={this.failToken} 
-    loading={this.state.loading}
-    buttonText="Some text"
+```js
+import {createTokenWithCard, Openpay} from 'openpay-react-native';
+// ...
+
+<Openpay
+  isProductionMode={false}
+  merchantId="merchantId"
+  publicKey="publicKey"
+  //address={address} //optional
+  successToken={successToken}
+  failToken={failToken}
+  deviceSession={deviceSession}
+  buttonText="Pagar"
+  custom={false}
 />
 
-// Note: address prop is optional.
+*Yo can see the example project
 ```
-And then on your successToken or failToken handler:
+
+###Custom labes and place holders
+
+```ts
+<Openpay
+                        isProductionMode={false}
+                        merchantId="merchantId"
+                        publicKey="publicKey"
+                        //address={address} //optional
+                        successToken={successToken}
+                        failToken={failToken}
+                        deviceSession={deviceSession}
+                        buttonText="Pagar"
+                        custom={false}
+                        labels={
+                            {
+                                holder: 'Nombre completo',
+                                expiration: 'FECHA'
+                            }
+                        }
+                        placeholders={{
+                            holder: "Nombre Apellidos",
+                            number: 'xxxx xxxx **** ****',
+                            expiration: 'MM/YY',
+                            cvv: 'CVV'
+                        }}
+                    />
+```
+
+### Device session id
+With the inicilization of de component you have to pass a callback that will be called with the deviceSession
 
 ```js
-state = {
-    loading: false
-}
-
-successToken = (response) => {        
-    const deviceSessionId = createDeviceSessionId();
-    console.log('createDeviceSessionId', deviceSessionId);
-    console.log('successToken', response);
-    this.setState(() => ({loading: false}))
-}
-
-failToken = (response) => {
-    console.log('failToken', response);
-}
+const deviceSession = (response) => {
+    console.log('deviceSession');
+    console.log(response);
+  };
 ```
 
-## Props
-| Property | Type | Description | Required |
-| --- | --- | --- | --- |
-|isProductionMode | Boolean | Defines the Openpay environment| Yes |
-|merchantId | String | Openpay Merchant ID | Yes |
-|publicKey | String | Openpay Public Key | Yes |
-|successToken | Function | It will receive the card token and here you will need to add your logic | Yes |
-|failToken | Function | It will receive the error if something wrong happen | Yes |
-|loading | Boolean | Adds a spinner to the button when the user clicks on it | Yes |
-|address | Object | You can add the address of your customer | No |
-|buttonText | String | Button's text | No |
+### Custom form
+With the inicialization of the component you have to pass custom to true: custom={true}. With this, the form just call the device
+session callback and let you tokenize the card manually with the exported function:
 
+```ts
+import {createTokenWithCard, Openpay} from 'openpay-react-native';```
 
-## Methods
-### createDeviceSessionId
-This method creates the device session id.
-```js
-const deviceSessionId = createDeviceSessionId();
+```ts
+createTokenWithCard(
+  {
+    holder_name: 'Nombre Prueba',
+    cvv2: '111',
+    expiration_month: '12',
+    card_number: '424242424242424242',
+    expiration_year: '25',
+    isProductionMode: false,
+    merchantId: 'merchantId',
+    publicKey: 'publicKey',
+  }
+).then((response) => {
+  console.log(response);
+});
 ```
 
-## Example
-```js
-import React, {Component} from 'react';
-import Openpay, {createDeviceSessionId} from 'openpay-react-native';
 
-export default class OpenpayScreen extends Component {
-    state = {
-        loading: false
-    }
+##Full example
+```ts
+import * as React from 'react';
+import { useEffect } from 'react';
+import {
+  Alert,
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  View,
+} from 'react-native';
+import {createTokenWithCard, Openpay} from 'openpay-react-native';
 
-    successToken = (response) => {        
-        const deviceSessionId = createDeviceSessionId();
-        const token = response.id;
-        this.setState(() => ({loading: false}));
+export default function App() {
+  const successToken = (response) => {
+    console.log(response);
+    Alert.alert('Tokne generado', response.id, [
+      { text: 'OK', onPress: () => console.log('OK Pressed') },
+    ]);
+  };
+  const failToken = (response) => {
+    console.log(failToken);
+    console.log(response);
+    Alert.alert('Datos inválidos', [
+      { text: 'OK', onPress: () => console.log('OK Pressed') },
+    ]);
+  };
 
-        // Make the call to your server with your charge request
-    }
-
-    failToken = (response) => {
-        console.log('failToken', response);
-    }
-
-    render() {
-        const address = {
-            "city":"Querétaro",
-            "country_code":"MX",
-            "postal_code":"76900",
-            "line1":"Av 5 de Febrero",
-            "line2":"Roble 207",
-            "line3":"Col Carrillo",
-            "state":"Queretaro"
-        };
-
-        return (
-            <Openpay 
-                isProductionMode={false} 
-                merchantId="YOUR_MERCHANT_ID" 
-                publicKey="YOUR_PUBLIC_KEY" 
-                address={address} 
-                successToken={this.successToken} 
-                failToken={this.failToken} 
-                loading={this.state.loading}
-            />
-        );
-    }
+  const deviceSession = (response) => {
+    console.log('deviceSession');
+    console.log(response);
+  };
+  
+  return (
+    <SafeAreaView>
+      <StatusBar barStyle={'light-content'} />
+      <ScrollView
+        style={styles.scrollView}
+        contentInsetAdjustmentBehavior="automatic">
+        <View style={styles.sectionContainer}>
+          <Openpay
+            isProductionMode={false}
+            merchantId="merchantId"
+            publicKey="publicKey"
+            //address={address} //optional
+            successToken={successToken}
+            failToken={failToken}
+            deviceSession={deviceSession}
+            buttonText="Pagar"
+            custom={false}
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
 }
-```
 
-## Future Improvements
-* Customize credit card image
-* Customize button style
-* Add unit tests
+const styles = StyleSheet.create({
+  sectionContainer: {
+    marginTop: 32,
+    paddingHorizontal: 24,
+  },
+  scrollView: {
+  },
+});
+
+```
 
 ## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+
+MIT
