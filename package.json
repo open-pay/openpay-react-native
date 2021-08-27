@@ -152,8 +152,6 @@
     ]
   },
   "dependencies": {
-    "buffer": "6.0.3",
-    "sprintf-js": "1.1.2",
-    "react-native-credit-card-form-ui": "^1.2.5"
+
   }
 }
