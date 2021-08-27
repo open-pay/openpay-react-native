@@ -18,8 +18,7 @@ Openpay
 You can use our default form or you can use a custom form
 
 ```js
-import Openpay from 'openpay-react-native';
-
+import {createTokenWithCard, Openpay} from 'openpay-react-native';
 // ...
 
 <Openpay
@@ -80,8 +79,7 @@ With the inicialization of the component you have to pass custom to true: custom
 session callback and let you tokenize the card manually with the exported function:
 
 ```ts
-import Openpay, {createTokenWithCard} from 'openpay-react-native';
-```
+import {createTokenWithCard, Openpay} from 'openpay-react-native';```
 
 ```ts
 createTokenWithCard(
@@ -113,7 +111,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import Openpay from 'openpay-react-native';
+import {createTokenWithCard, Openpay} from 'openpay-react-native';
 
 export default function App() {
   const successToken = (response) => {
