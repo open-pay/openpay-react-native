@@ -281,10 +281,7 @@ export class Openpay extends Component {
 const styles = StyleSheet.create({
     cardWrapper: {
         height: 300,
-        // flexDirection: 'column',
-        // justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: 'yellow',
     },
     button: {
         height: 45,

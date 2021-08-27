@@ -10,15 +10,20 @@
     "start": "react-native start"
   },
   "dependencies": {
+    "expo": "~42.0.1",
+    "expo-splash-screen": "~0.11.2",
     "react": "16.13.1",
+    "react-dom": "16.13.1",
     "react-native": "0.63.4",
-    "react-native-credit-card-form-ui": "1.2.5",
+    "react-native-unimodules": "~0.14.6",
+    "react-native-web": "~0.14.9",
+
+    "react-native-credit-card-form-ui": "^1.2.5",
     "react-native-device-info": "8.3.1",
-    "react-native-webview": "11.13.0",
     "react-native-elements": "3.4.2",
-    "sprintf-js": "1.1.2",
-    "react-native-safe-area-context": "3.3.0",
     "react-native-vector-icons": "8.1.0",
+    "react-native-webview": "11.6.2",
+    "sprintf-js": "1.1.2",
     "buffer": "6.0.3"
   },
   "devDependencies": {
